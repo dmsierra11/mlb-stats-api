@@ -1,10 +1,14 @@
-# FastAPI Microservice Template
+# MLB Stats API
 
-A modern, production-ready template for building microservices with FastAPI.
+A modern, production-ready API for fetching MLB statistics and player information.
 
 ## Features
 
 - 🚀 FastAPI framework with modern Python features
+- 📊 Comprehensive MLB statistics and player data
+- 🔍 Player search functionality
+- 📈 Detailed player statistics (hitting, pitching, fielding)
+- 👥 Team information and rosters
 - 📝 Pydantic for data validation and settings management
 - 🧪 Comprehensive test suite with pytest
 - 🔍 Code quality tools (black, isort, mypy, flake8)
@@ -12,6 +16,22 @@ A modern, production-ready template for building microservices with FastAPI.
 - 🐳 Docker support
 - 🔐 Environment-based configuration
 - 📚 API documentation with Swagger UI
+
+## API Endpoints
+
+### Players
+- `GET /api/v1/mlb/players/search` - Search for players by name
+- `GET /api/v1/mlb/players/{player_id}` - Get player information
+- `GET /api/v1/mlb/players/{player_id}/stats` - Get player statistics
+  - Query parameters:
+    - `season`: The season year (e.g., 2024)
+    - `stats_type`: Type of stats (season, career)
+    - `group`: Stats group (hitting, pitching, fielding)
+
+### Teams
+- `GET /api/v1/mlb/teams` - Get all MLB teams
+- `GET /api/v1/mlb/teams/{team_id}` - Get team information
+- `GET /api/v1/mlb/teams/{team_id}/roster` - Get team roster
 
 ## Prerequisites
 
@@ -23,8 +43,8 @@ A modern, production-ready template for building microservices with FastAPI.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dmsierra11/fantasy-fastapi-template.git
-   cd fantasy-fastapi-template
+   git clone https://github.com/dmsierra11/mlb-stats-api.git
+   cd mlb-stats-api
    ```
 
 2. Create and activate a virtual environment:
@@ -149,38 +169,32 @@ The project uses `pyproject.toml` for configuration of various tools:
 Build the Docker image locally:
 
 ```bash
-docker build -t fastapi-microservice .
+docker build -t mlb-stats-api .
 ```
 
 Run the container from the local image:
 
 ```bash
-docker run -p 8000:8000 fastapi-microservice
+docker run -p 8000:8000 mlb-stats-api
 ```
-
-Or, run the container directly from DockerHub (replace `yourusername` with your DockerHub username):
-
-```bash
-docker run -p 8000:8000 yourusername/fastapi-microservice
-```
-
-> **Note:** Replace `yourusername` with your DockerHub username if you want to pull the image from DockerHub.
 
 ## Project Structure
 
 ```
-fantasy-fastapi-template/
+mlb-stats-api/
 ├── app/
 │   ├── routers/         # API routes
-│   │   └── example_router.py
+│   │   └── mlb_router.py
 │   ├── services/        # Business logic
-│   │   └── example_service.py
+│   │   └── mlb_service.py
+│   ├── models/         # Data models
+│   │   └── mlb_models.py
 │   └── __init__.py
 ├── tests/
 │   ├── routers/         # Route tests
-│   │   └── test_example_router.py
+│   │   └── test_mlb_router.py
 │   ├── services/        # Service tests
-│   │   └── test_example_service.py
+│   │   └── test_mlb_service.py
 │   └── __init__.py
 ├── .github/
 │   └── workflows/       # GitHub Actions workflows

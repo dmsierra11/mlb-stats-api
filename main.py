@@ -3,11 +3,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import example_router
+from app.routers import mlb_router
 
 app = FastAPI(
-    title="FastAPI Microservice Template",
-    description="A template for building microservices with FastAPI",
+    title="MLB Stats API",
+    description="A FastAPI service for fetching MLB statistics",
     version="0.1.0",
 )
 
@@ -22,7 +22,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(
-    example_router.router,
+    mlb_router.router,
     prefix="/api/v1",
 )
 
@@ -30,7 +30,7 @@ app.include_router(
 @app.get("/")
 async def root() -> dict[str, str]:
     """Return a welcome message."""
-    return {"message": "Welcome to FastAPI Microservice Template"}
+    return {"message": "Welcome to MLB Stats API"}
 
 
 if __name__ == "__main__":
