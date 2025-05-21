@@ -1,4 +1,4 @@
-.PHONY: install format lint test clean
+.PHONY: install format lint test clean run
 
 install:
 	pip install -r requirements.txt
@@ -29,3 +29,6 @@ clean:
 	find . -type d -name "htmlcov" -exec rm -r {} +
 	find . -type d -name "dist" -exec rm -r {} +
 	find . -type d -name "build" -exec rm -r {} +
+
+run:
+	. .venv/bin/activate && uvicorn main:app --reload --host 0.0.0.0 --port 8000
