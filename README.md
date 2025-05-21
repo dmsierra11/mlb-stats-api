@@ -33,8 +33,8 @@ A modern, production-ready API for fetching MLB statistics and player informatio
 ### Teams
 
 - `GET /api/v1/mlb/teams` - Get all MLB teams
-- `GET /api/v1/mlb/teams/{team_id}` - Get team information
-- `GET /api/v1/mlb/teams/{team_id}/roster` - Get team roster
+- `GET /api/v1/mlb/teams/{team_id}` - Get team information (team_id must be a numeric ID, not a team abbreviation)
+- `GET /api/v1/mlb/teams/{team_id}/roster` - Get team roster (team_id must be a numeric ID, not a team abbreviation)
 
 ## Prerequisites
 
