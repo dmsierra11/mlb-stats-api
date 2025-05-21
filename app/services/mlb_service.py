@@ -120,18 +120,15 @@ class MLBService:
         data = response.json()
         return Player(**data["people"][0])
 
-    def get_teams(self, sport_id: int = 1) -> List[Team]:
+    def get_teams(self) -> List[Team]:
         """
         Get all teams.
-
-        Args:
-            sport_id: The sport ID (1 for MLB)
 
         Returns:
             List of teams
         """
         endpoint = f"{self.BASE_URL}/teams"
-        params = {"sportId": sport_id}
+        params = {"sportId": 1}  # MLB
         response = self.session.get(endpoint, params=params)
         response.raise_for_status()
         data = response.json()

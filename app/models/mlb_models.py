@@ -58,7 +58,7 @@ class Team(BaseModel):
     id: int
     name: str
     teamCode: str
-    fileCode: str
+    fileCode: Optional[str] = None
     abbreviation: str
     teamName: str
     locationName: str
@@ -71,6 +71,11 @@ class Team(BaseModel):
     clubName: Optional[str] = None
     allStarStatus: Optional[str] = None
     active: bool
+    springLeague: Optional[dict] = None
+    link: Optional[str] = None
+    season: Optional[int] = None
+    venue: Optional[dict] = None
+    springVenue: Optional[dict] = None
 
 
 class RosterPlayer(BaseModel):

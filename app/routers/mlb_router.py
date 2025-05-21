@@ -77,18 +77,15 @@ async def get_player_stats(
 
 
 @router.get("/teams", response_model=List[Team])
-async def get_teams(sport_id: int = 1) -> List[Team]:
+async def get_teams() -> List[Team]:
     """
     Get all teams.
-
-    Args:
-        sport_id: The sport ID (1 for MLB)
 
     Returns:
         List of teams
     """
     try:
-        return mlb_service.get_teams(sport_id)
+        return mlb_service.get_teams()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
