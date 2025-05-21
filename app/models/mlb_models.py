@@ -81,10 +81,11 @@ class Team(BaseModel):
 class RosterPlayer(BaseModel):
     """Roster player model."""
 
-    person: Player
+    person: dict  # Contains id, fullName, and link
     jerseyNumber: Optional[str] = None
     position: dict
     status: Optional[dict] = None
+    parentTeamId: Optional[int] = None
 
 
 class SearchResponse(BaseModel):
