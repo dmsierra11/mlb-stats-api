@@ -71,6 +71,53 @@ A modern, production-ready API for fetching MLB statistics and player informatio
 
 The API will be available at http://localhost:8000
 
+## Running the Project
+
+### Local Development
+
+1. Make sure you have all prerequisites installed and the virtual environment activated:
+   ```bash
+   # Activate virtual environment if not already activated
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. Start the development server:
+   ```bash
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   ```
+
+3. Access the API:
+   - API Base URL: http://localhost:8000
+   - Interactive API Documentation: http://localhost:8000/docs
+   - Alternative API Documentation: http://localhost:8000/redoc
+
+### Using Docker
+
+1. Build the Docker image:
+   ```bash
+   docker build -t mlb-stats-api .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 8000:8000 mlb-stats-api
+   ```
+
+3. Access the API using the same URLs as local development.
+
+### Environment Variables
+
+The following environment variables can be configured (create a `.env` file in the project root):
+
+```env
+# API Configuration
+API_HOST=0.0.0.0
+API_PORT=8000
+DEBUG=True
+
+# Add other environment variables as needed
+```
+
 ## API Documentation
 
 - Swagger UI: http://localhost:8000/docs
