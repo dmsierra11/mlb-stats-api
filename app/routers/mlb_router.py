@@ -1,41 +1,18 @@
 """MLB Stats API router."""
 
-from typing import List, Optional
+from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from app.models.mlb_models import (
-    Player,
-    PlayerStats,
-    RosterPlayer,
-    SearchResponse,
-    Team,
-)
+from app.models.mlb_models import Player, PlayerStats, RosterPlayer, Team
 from app.services.mlb_service import MLBService
 
 router = APIRouter(prefix="/mlb", tags=["mlb"])
 mlb_service = MLBService()
 
 
-@router.get("/players/search", response_model=SearchResponse)
-async def search_players(query: str) -> SearchResponse:
-    """
-    Search for players by name.
-
-    Args:
-        query: Player name to search for
-
-    Returns:
-        List of matching players
-    """
-    try:
-        return mlb_service.search_players(query)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @router.get("/players/{player_id}", response_model=Player)
-async def get_player(player_id: int) -> Player:
+def get_player(player_id: int) -> Player:
     """
     Get player information.
 
@@ -52,9 +29,9 @@ async def get_player(player_id: int) -> Player:
 
 
 @router.get("/players/{player_id}/stats", response_model=PlayerStats)
-async def get_player_stats(
+def get_player_stats(
     player_id: int,
-    season: Optional[int] = None,
+    season: int | None = None,
     stats_type: str = "season",
     group: str = "hitting",
 ) -> PlayerStats:
@@ -71,13 +48,15 @@ async def get_player_stats(
         Player statistics
     """
     try:
-        return mlb_service.get_player_stats(player_id, season, stats_type, group)
+        return mlb_service.get_player_stats(
+            player_id, season=season, stats_type=stats_type, group=group
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/teams", response_model=List[Team])
-async def get_teams() -> List[Team]:
+def get_teams() -> List[Team]:
     """
     Get all teams.
 
@@ -91,7 +70,7 @@ async def get_teams() -> List[Team]:
 
 
 @router.get("/teams/{team_id}", response_model=Team)
-async def get_team(team_id: int) -> Team:
+def get_team(team_id: int) -> Team:
     """
     Get team information.
 
@@ -108,7 +87,7 @@ async def get_team(team_id: int) -> Team:
 
 
 @router.get("/teams/{team_id}/roster", response_model=List[RosterPlayer])
-async def get_team_roster(team_id: int) -> List[RosterPlayer]:
+def get_team_roster(team_id: int) -> List[RosterPlayer]:
     """
     Get team roster.
 

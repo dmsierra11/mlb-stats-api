@@ -8,7 +8,6 @@ from app.models.mlb_models import (
     Player,
     PlayerStats,
     RosterPlayer,
-    SearchResponse,
     Team,
 )
 
@@ -52,23 +51,6 @@ class MLBService:
         response = self.session.get(endpoint, params=params)
         response.raise_for_status()
         return PlayerStats(**response.json())
-
-    def search_players(self, query: str) -> SearchResponse:
-        """
-        Search for players by name.
-
-        Args:
-            query: Player name to search for
-
-        Returns:
-            List of matching players
-        """
-        endpoint = f"{self.BASE_URL}/people/search"
-        params = {"q": query}
-
-        response = self.session.get(endpoint, params=params)
-        response.raise_for_status()
-        return SearchResponse(**response.json())
 
     def get_team_roster(self, team_id: int) -> List[RosterPlayer]:
         """
